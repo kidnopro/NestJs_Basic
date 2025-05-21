@@ -1,22 +1,10 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { DatabaseModule } from './database/database.module';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './user/users.module';
+
 
 @Module({
-  imports: [
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'postgres',
-      password: 'cucucu99',
-      database: 'dayladb',
-      entities: [],
-      synchronize: true, // Tự động tạo table, chỉ dùng trong môi trường đép
-    }),
-  ],
-  controllers: [AppController],
-  providers: [AppService],
+  imports: [DatabaseModule, AuthModule, UsersModule],
 })
 export class AppModule {}
